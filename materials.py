@@ -32,10 +32,11 @@ def mats_create(mass, iter):
     red = int(150 * random.random())
     green = int(100 * random.random()) + 150
     blue = int(150 * random.random())
-
-    out = "mat fuel" +str(iter) + " -10.45700 rgb " + str(red) + " " + str(green) + " " + str(blue) + "\n"
+    out = ""
+    out += "% --- UO2 fuel enriched to " "%"
+    out += "mat fuel" +str(iter) + " -10.45700 rgb " + str(red) + " " + str(green) + " " + str(blue) + "\n"
     for i in keys:
-        out = out + i + ".09c   -" + str(mass[i]) + "\n"
+        out += i + ".09c   -" + str(mass[i]) + "\n"
     return out + "\n\n"
 
 def materials(sections,materials):

@@ -1,3 +1,14 @@
+fin = open("standart", "r")
+fout = open("new", "w")
+x  = fin.read().encode('unicode_escape')
+print(x, file = fout)
+
+
+
+
+
+
+
 """
 for enrich
 mass = {}
@@ -24,7 +35,7 @@ mass["8016"] = mo2
 
 print(mass)
 
-"""
+
 
 S = ["name:abrakadabra", 3, 0.01, 0.02, 0.03, "name:fuk", 5, 0.02, 0.03, 0.05, 0.06, 0.07]
 
@@ -52,3 +63,5 @@ while i <len(S):
     out.append(temp)
 
 print(out)
+
+"""
