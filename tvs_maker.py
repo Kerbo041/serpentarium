@@ -232,16 +232,16 @@ def get_input():
 def file_read():
 
     try:
-        parameters = open("parameters", "r")
+        parameters = open("parameters.txt", "r")
     except:
         print("------------------------------\nno file, creating new\n------------------------------\n\n")
-        parameters = open("parameters", "w")
+        parameters = open("parameters.txt", "w")
         print("name:%file_name%",file = parameters)
-        print("%number of sections",file = parameters)
-        print("enrichment for 1 section",file = parameters)
-        print("enrichment for 2 section",file = parameters)
+        print("%number of sections%",file = parameters)
+        print("%enrichment for 1 section%",file = parameters)
+        print("%enrichment for 2 section%",file = parameters)
         print("...",file = parameters)
-        print("enrichment for n section",file = parameters)
+        print("%enrichment for n section%",file = parameters)
         return False
     input_parameters = [line for line in parameters.readlines()]
     i = 0
