@@ -27,13 +27,13 @@ def mass_x(u235_x):
     return mass
 
 
-def mats_create(mass, iter):
+def mats_create(mass, iter, u235_x):
     keys = mass.keys()
     red = int(150 * random.random())
     green = int(100 * random.random()) + 150
     blue = int(150 * random.random())
     out = ""
-    out += "% --- UO2 fuel enriched to " "%"
+    out += "% --- UO2 fuel enriched to " + str(u235_x*100) +  "%\n"
     out += "mat fuel" +str(iter) + " -10.45700 rgb " + str(red) + " " + str(green) + " " + str(blue) + "\n"
     for i in keys:
         out += i + ".09c   -" + str(mass[i]) + "\n"
@@ -50,7 +50,7 @@ def materials(sections,materials):
     mats_out = ""
     mats_out += "% --- Zr-Nb cladding and shroud tube:\n\nmat clad    -6.55000 rgb 100 100 100\n40000.06c   -0.99000\n41093.06c   -0.01000\n\nmat tube    -6.58000 rgb 200 200 200\n40000.06c   -0.97500\n41093.06c   -0.02500\n\nmat wst -4.100 rgb 150 150 255 %12X18H10T\n6012.06c 0.00600\n26056.06c 0.34900\n24052.06c 0.09000\n28059.06c 0.05000\n22048.06c 0.00500\n8016.06c 0.44444\n1001.06c 0.05556\n\n\n% --- Water:\n\nmat water   -0.7207  moder lwtr 1001 rgb 0 0 255\n 1001.06c    2.0\n 8016.06c    1.0\n\n% --- UO2 fuel enriched to 3.6 wt-% U-235 with gd-64:\n\nmat fuel_gd   -10.45700 rgb 200 255 200\n92235.09c   -0.04103\n92238.09c   -0.79631\n64000.09c   -0.05000\n 8016.09c   -0.11266\n\n"
     for i in range(sections):
-        mats_out += (mats_create(mat_par[i], i+1))
+        mats_out += (mats_create(mat_par[i], i+1, u235_x[i]))
     
     return "% --- materials\n\n" + mats_out + "\n\n\n"
 def pin_create(iter):
@@ -185,7 +185,7 @@ def printer(name, str_out):
 def create(input_parameters):
     #standart = open("standart", "r")
     #standart_input = [line for line in standart.readlines()]
-    standart_input = "\n% --- Thermal scattering data for light water:\\n\\ntherm lwtr lwj3.11t\\n\\n% --- Cross section library file path:\\n\\nset acelib \"/home/viti/serpent/xs/jeff311/jeff311u.xsdata\"\\nset nfylib \"/home/viti/serpent/xs/jeff311/sss_jeff311.nfy\"\\nset declib \"/home/viti/serpent/xs/jeff311/sss_jeff311.dec\"\\n\\n\\n% --- Periodic boundary condition:\\n\\nset bc 3\\n\\n% --- Group constant generation:\\n\\n% universe = 0 (homogenization over all space)\\n% symmetry = 12\\n% 2-group structure (group boundary at 0.625 eV)\\n\\nset gcu  0\\nset sym  12\\nset nfg  2  0.625E-6\\n\\n% --- Neutron population and criticality cycles:\\n\\nset pop 5000 20 20\\n\\n% --- Geometry and mesh plots:\\n\\nplot 3 5000 5000\\nplot 2 5000 5000 0 -250 300\\nmesh 2 5000 5000\\nmesh 3 5000 5000"
+    standart_input = "\n% --- Thermal scattering data for light water:\n\ntherm lwtr lwj3.11t\n\n% --- Cross section library file path:\n\nset acelib \"/home/viti/serpent/xs/jeff311/jeff311u.xsdata\"\nset nfylib \"/home/viti/serpent/xs/jeff311/sss_jeff311.nfy\"\nset declib \"/home/viti/serpent/xs/jeff311/sss_jeff311.dec\"\n\n\n% --- Periodic boundary condition:\n\nset bc 3\n\n% --- Group constant generation:\n\n% universe = 0 (homogenization over all space)\n% symmetry = 12\n% 2-group structure (group boundary at 0.625 eV)\n\nset gcu  0\nset sym  12\nset nfg  2  0.625E-6\n\n% --- Neutron population and criticality cycles:\n\nset pop 5000 20 20\n\n% --- Geometry and mesh plots:\n\nplot 3 5000 5000\nplot 2 5000 5000 0 -250 300\nmesh 2 5000 5000\nmesh 3 5000 5000"
     name = input_parameters[0]
     sections = int(input_parameters[1])
     mats = input_parameters[2:]
