@@ -38,11 +38,11 @@ def mats_create(mass, iter):
         out = out + i + ".09c   -" + str(mass[i]) + "\n"
     return out + "\n\n"
 
-def materials(sections,input_parameters):
+def materials(sections,materials):
     u235_x = []
 
     for i in range(sections):
-        u235_x.append(float(input_parameters[i+1]))
+        u235_x.append(float(materials[i]))
 
     mat_par = [mass_x(i) for i in u235_x]
 

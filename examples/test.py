@@ -26,5 +26,29 @@ print(mass)
 
 """
 
-pins_out = "% --- Central tube:\n\npin c\n\nwater  0.55\ntube   0.65\nwater   \n\n % --- Empty lattice position:\n\npin w\n\nwater \n  \n% --- fuel with Gd-64\n\npin g\n\nvoid 0.06\nfuel_gd   0.38000\nvoid   0.38650\nclad   0.45500\nwater   \n\npin t\n\nwst 0.45500\nwater\n\n %--- Fuel pins\n\n"
-print(pins_out)
+S = ["name:abrakadabra", 3, 0.01, 0.02, 0.03, "name:fuk", 5, 0.02, 0.03, 0.05, 0.06, 0.07]
+
+
+i = 0
+out = []
+
+while i <len(S):
+
+    temp = []
+
+    temp.append(S[i].split(":")[1])
+
+    i += 1
+    sections = S[i]
+
+    temp.append(sections)
+    
+    i += 1
+    enr = []
+    for j in range(sections):
+        temp.append(S[i])
+        i+=1
+    
+    out.append(temp)
+
+print(out)
