@@ -1,6 +1,6 @@
 
-from materials import materials
-from geometry import geometry
+from modules.output.materials.materials import materials
+from modules.output.geometry.geometry import geometry
 import re
 
 def printer(name, str_out):
