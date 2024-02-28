@@ -1,4 +1,4 @@
-fin = open("standart", "r")
+"""fin = open("standart", "r")
 fout = open("new", "w")
 x  = fin.read().encode('unicode_escape')
 print(x, file = fout)
@@ -9,7 +9,7 @@ print(x, file = fout)
 
 
 
-"""
+
 for enrich
 mass = {}
 u235_x = 0.095
@@ -65,3 +65,9 @@ while i <len(S):
 print(out)
 
 """
+
+fin = open("examples/template", "r")
+
+raw = fin.read()
+print(raw)
+print(raw.format(i = 10))

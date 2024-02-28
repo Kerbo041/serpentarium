@@ -1,10 +1,10 @@
 
-from modules.output.materials.materials import materials
-from modules.output.geometry.geometry import geometry
+from modules.formattor.materials.materials import materials
+from modules.formattor.geometry.geometry import geometry
 import re
 
 def printer(name, str_out):
-    fout = open(name, "w")
+    fout = open("output/"+ name, "w")
     print(str_out, file = fout)
     print("--------------------------------------\nfiles created\n--------------------------------------\n\n")
 
@@ -45,7 +45,7 @@ def get_input():
             sections = int(input("enter the number of sections\n"))
             temp_data.append(sections)
             for i in range(sections):
-                enrich = float(input("enrichment of " + str(i) + " section of tvs:\n"))
+                enrich = float(input("enrichment of " + str(i+1) + " section of tvs:\n"))
                 temp_data.append(enrich)
             printer(name, create(temp_data))
             return True
