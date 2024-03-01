@@ -3,11 +3,12 @@ from modules.interface.console import get_input
 
 def main():
 
-    tk_on = False
+    tk_on = True
     i = True
     while i:
         if tk_on == True:
-            i = interface()
+            interface()
+            i = False
         else:
             i = get_input()
    

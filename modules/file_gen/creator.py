@@ -17,7 +17,7 @@ def creator(input_parameters):
         }
     )
 
-    str_out += materials(sections,mats)
+    str_out += materials(sections, mats)
     str_out += geometry(sections)
     str_out += default("file_end_default")
 
