@@ -1,0 +1,306 @@
+% variant: 5
+
+% --------------------------------------\ U49G6 Assembly --------------------------------------
+
+
+
+% -------------------- MATERIALS --------------------
+
+% --- Zr-Nb cladding and shroud tube:
+
+mat clad    -6.55000 rgb 100 100 100
+40000.06c   -0.99000
+41093.06c   -0.01000
+
+mat tube    -6.58000 rgb 200 200 200
+40000.06c   -0.97500
+41093.06c   -0.02500
+
+mat wst -4.100 rgb 150 150 255 %12X18H10T
+6012.06c 0.00600
+26056.06c 0.34900
+24052.06c 0.09000
+28059.06c 0.05000
+22048.06c 0.00500
+8016.06c 0.44444
+1001.06c 0.05556
+
+
+% --- Water:
+
+mat water   -0.7207  moder lwtr 1001 rgb 0 0 255
+ 1001.06c    2.0\n 8016.06c    1.0
+ 
+
+ % --- UO2 fuel enriched to 3.6 wt-% U-235 with gd-64:
+ 
+ mat fuel_gd   -10.45700 rgb 200 255 200
+ 92235.09c   -0.04103
+ 92238.09c   -0.79631
+ 64000.09c   -0.05000
+ 8016.09c   -0.11266
+% --- UO2 fuel enriched to 0.05 :
+mat fuel1 -10.45700 rgb 55 220 55
+92235.09c   -0.04354
+92238.09c   -0.83788
+ 8016.09c   -0.11858
+
+% --- UO2 fuel enriched to 0.03 :
+mat fuel2 -10.45700 rgb 121 234 88
+92235.09c   -0.02612
+92238.09c   -0.85532
+ 8016.09c   -0.11856
+
+% --- UO2 fuel enriched to 0.05 :
+mat fuel3 -10.45700 rgb 16 158 49
+92235.09c   -0.04354
+92238.09c   -0.83788
+ 8016.09c   -0.11858
+
+
+
+
+
+% -------------------- PINS --------------------
+
+% --- Central tube:
+
+pin c
+
+water  0.55
+tube   0.65
+water
+
+ % --- Empty lattice position:
+
+pin w
+
+water
+
+% --- fuel with Gd-64
+
+pin g
+
+void 0.06
+fuel_gd   0.38000
+void   0.38650
+clad   0.45500
+water
+
+pin t
+
+wst 0.45500
+water
+
+ %--- Fuel pins
+
+ pin 1
+
+void        0.06
+fuel1  0.38000
+void        0.38650
+clad        0.45500
+water
+
+pin 2
+
+void        0.06
+fuel2  0.38000
+void        0.38650
+clad        0.45500
+water
+
+pin 3
+
+void        0.06
+fuel3  0.38000
+void        0.38650
+clad        0.45500
+water
+
+
+
+
+
+% -------------------- LATTICE --------------------
+
+lat lt 2  0.0 0.0 23 23 1.275
+
+w w w w w w w w w w w w w w w w w w w w w w w 
+ w w w w w w w w w w w t t t t t t t t t t t w 
+  w w w w w w w w w w t t t t t t t t t t t t w 
+   w w w w w w w w w t t g t t t t t t t g t t w 
+    w w w w w w w w t t t t t t t t t t t t t t w 
+     w w w w w w w t t t t t t t c t t t t t t t w 
+      w w w w w w t t t t t c t t t t c t t t t t w 
+       w w w w w t t t t t t t t t t t t t t t t t w 
+        w w w w t t t t c t t t c t t t t c t t t t w 
+         w w w t t t t t t t t t t t c t t t t t t t w 
+          w w t t t t t t t c t t t t t t t t t t t t w 
+           w t t g t t c t t t t c t t t t c t t g t t w 
+            w t t t t t t t t t t t t c t t t t t t t w w 
+             w t t t t t t t c t t t t t t t t t t t w w w              
+              w t t t t c t t t t c t t t c t t t t w w w w            	
+               w t t t t t t t t t t t t t t t t t w w w w w             	 
+                w t t t t t c t t t t c t t t t t w w w w w w               	  
+                 w t t t t t t t c t t t t t t t w w w w w w w                	  
+                  w t t t t t t t t t t t t t t w w w w w w w w               	    
+                   w t t g t t t t t t t g t t w w w w w w w w w               	    
+                    w t t t t t t t t t t t t w w w w w w w w w w               	     
+                     w t t t t t t t t t t t w w w w w w w w w w w             	     
+                      w w w w w w w w w w w w w w w w w w w w w w w
+
+
+lat l1 2  0.0 0.0 23 23 1.275
+
+w w w w w w w w w w w w w w w w w w w w w w w 
+ w w w w w w w w w w w 1 1 1 1 1 1 1 1 1 1 1 w 
+  w w w w w w w w w w 1 1 1 1 1 1 1 1 1 1 1 1 w 
+   w w w w w w w w w 1 1 g 1 1 1 1 1 1 1 g 1 1 w 
+    w w w w w w w w 1 1 1 1 1 1 1 1 1 1 1 1 1 1 w 
+     w w w w w w w 1 1 1 1 1 1 1 c 1 1 1 1 1 1 1 w 
+      w w w w w w 1 1 1 1 1 c 1 1 1 1 c 1 1 1 1 1 w 
+       w w w w w 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 w 
+        w w w w 1 1 1 1 c 1 1 1 c 1 1 1 1 c 1 1 1 1 w 
+         w w w 1 1 1 1 1 1 1 1 1 1 1 c 1 1 1 1 1 1 1 w 
+          w w 1 1 1 1 1 1 1 c 1 1 1 1 1 1 1 1 1 1 1 1 w 
+           w 1 1 g 1 1 c 1 1 1 1 c 1 1 1 1 c 1 1 g 1 1 w 
+            w 1 1 1 1 1 1 1 1 1 1 1 1 c 1 1 1 1 1 1 1 w w 
+             w 1 1 1 1 1 1 1 c 1 1 1 1 1 1 1 1 1 1 1 w w w              
+              w 1 1 1 1 c 1 1 1 1 c 1 1 1 c 1 1 1 1 w w w w            	
+               w 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 w w w w w             	 
+                w 1 1 1 1 1 c 1 1 1 1 c 1 1 1 1 1 w w w w w w               	  
+                 w 1 1 1 1 1 1 1 c 1 1 1 1 1 1 1 w w w w w w w                	  
+                  w 1 1 1 1 1 1 1 1 1 1 1 1 1 1 w w w w w w w w               	    
+                   w 1 1 g 1 1 1 1 1 1 1 g 1 1 w w w w w w w w w               	    
+                    w 1 1 1 1 1 1 1 1 1 1 1 1 w w w w w w w w w w               	     
+                     w 1 1 1 1 1 1 1 1 1 1 1 w w w w w w w w w w w             	     
+                      w w w w w w w w w w w w w w w w w w w w w w w
+
+
+lat l2 2  0.0 0.0 23 23 1.275
+
+w w w w w w w w w w w w w w w w w w w w w w w 
+ w w w w w w w w w w w 2 2 2 2 2 2 2 2 2 2 2 w 
+  w w w w w w w w w w 2 2 2 2 2 2 2 2 2 2 2 2 w 
+   w w w w w w w w w 2 2 g 2 2 2 2 2 2 2 g 2 2 w 
+    w w w w w w w w 2 2 2 2 2 2 2 2 2 2 2 2 2 2 w 
+     w w w w w w w 2 2 2 2 2 2 2 c 2 2 2 2 2 2 2 w 
+      w w w w w w 2 2 2 2 2 c 2 2 2 2 c 2 2 2 2 2 w 
+       w w w w w 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 w 
+        w w w w 2 2 2 2 c 2 2 2 c 2 2 2 2 c 2 2 2 2 w 
+         w w w 2 2 2 2 2 2 2 2 2 2 2 c 2 2 2 2 2 2 2 w 
+          w w 2 2 2 2 2 2 2 c 2 2 2 2 2 2 2 2 2 2 2 2 w 
+           w 2 2 g 2 2 c 2 2 2 2 c 2 2 2 2 c 2 2 g 2 2 w 
+            w 2 2 2 2 2 2 2 2 2 2 2 2 c 2 2 2 2 2 2 2 w w 
+             w 2 2 2 2 2 2 2 c 2 2 2 2 2 2 2 2 2 2 2 w w w              
+              w 2 2 2 2 c 2 2 2 2 c 2 2 2 c 2 2 2 2 w w w w            	
+               w 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 w w w w w             	 
+                w 2 2 2 2 2 c 2 2 2 2 c 2 2 2 2 2 w w w w w w               	  
+                 w 2 2 2 2 2 2 2 c 2 2 2 2 2 2 2 w w w w w w w                	  
+                  w 2 2 2 2 2 2 2 2 2 2 2 2 2 2 w w w w w w w w               	    
+                   w 2 2 g 2 2 2 2 2 2 2 g 2 2 w w w w w w w w w               	    
+                    w 2 2 2 2 2 2 2 2 2 2 2 2 w w w w w w w w w w               	     
+                     w 2 2 2 2 2 2 2 2 2 2 2 w w w w w w w w w w w             	     
+                      w w w w w w w w w w w w w w w w w w w w w w w
+
+
+lat l3 2  0.0 0.0 23 23 1.275
+
+w w w w w w w w w w w w w w w w w w w w w w w 
+ w w w w w w w w w w w 3 3 3 3 3 3 3 3 3 3 3 w 
+  w w w w w w w w w w 3 3 3 3 3 3 3 3 3 3 3 3 w 
+   w w w w w w w w w 3 3 g 3 3 3 3 3 3 3 g 3 3 w 
+    w w w w w w w w 3 3 3 3 3 3 3 3 3 3 3 3 3 3 w 
+     w w w w w w w 3 3 3 3 3 3 3 c 3 3 3 3 3 3 3 w 
+      w w w w w w 3 3 3 3 3 c 3 3 3 3 c 3 3 3 3 3 w 
+       w w w w w 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 w 
+        w w w w 3 3 3 3 c 3 3 3 c 3 3 3 3 c 3 3 3 3 w 
+         w w w 3 3 3 3 3 3 3 3 3 3 3 c 3 3 3 3 3 3 3 w 
+          w w 3 3 3 3 3 3 3 c 3 3 3 3 3 3 3 3 3 3 3 3 w 
+           w 3 3 g 3 3 c 3 3 3 3 c 3 3 3 3 c 3 3 g 3 3 w 
+            w 3 3 3 3 3 3 3 3 3 3 3 3 c 3 3 3 3 3 3 3 w w 
+             w 3 3 3 3 3 3 3 c 3 3 3 3 3 3 3 3 3 3 3 w w w              
+              w 3 3 3 3 c 3 3 3 3 c 3 3 3 c 3 3 3 3 w w w w            	
+               w 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 w w w w w             	 
+                w 3 3 3 3 3 c 3 3 3 3 c 3 3 3 3 3 w w w w w w               	  
+                 w 3 3 3 3 3 3 3 c 3 3 3 3 3 3 3 w w w w w w w                	  
+                  w 3 3 3 3 3 3 3 3 3 3 3 3 3 3 w w w w w w w w               	    
+                   w 3 3 g 3 3 3 3 3 3 3 g 3 3 w w w w w w w w w               	    
+                    w 3 3 3 3 3 3 3 3 3 3 3 3 w w w w w w w w w w               	     
+                     w 3 3 3 3 3 3 3 3 3 3 3 w w w w w w w w w w w             	     
+                      w w w w w w w w w w w w w w w w w w w w w w w
+
+
+
+
+
+
+% -------------------- SURFACES --------------------
+
+surf tvs_hex	        hexyc	0.0  0.0  11.6625  	% Shroud tube inner radius
+
+surf tvel_bottom        pz 	    -188.5	            %tvel bottom
+surf tvel_top           pz  	210.7	            %tvel top
+
+surf tvs_bottom         pz 	    -215.2              %tvs bottom
+surf tvs_top            pz  	249.6	            %tvs top
+
+surf fuel_top           pz  	 184.0 	            %fuel top
+surf fuel_bottom        pz 	    -184.0	            %fuel bottom
+surf fuel_surf1    pz  	-61.33333333333333	        %fuel top
+surf fuel_surf2    pz  	61.33333333333334	        %fuel top
+
+% -------------------- CELLS --------------------
+
+cell  tvel_bottom_zone      0   fill lt         -tvs_hex    tvel_bottom     -fuel_bottom	% tvel bottom lattice
+cell  tvel_top_zone         0   fill lt         -tvs_hex    fuel_top        -tvel_top	    % tvel top lattice
+cell  tvs_bottom_zone       0   wst             -tvs_hex    tvs_bottom      -tvel_bottom    % tvs bottom
+cell  tvs_top_zone          0   wst             -tvs_hex    tvel_top        -tvs_top        % tvs top
+
+cell 99  0  outside                     tvs_hex 		                            % Outside world
+cell 98  0  outside                    -tvs_hex    -tvs_bottom		                % Outside world
+cell 97  0  outside                    -tvs_hex     tvs_top		                    % Outside world
+
+cell  tvel_section_1     0  fill l1 -tvs_hex     fuel_bottom        -fuel_surf_1	    % tvel section 1
+cell  tvel_section_2     0  fill l2 -tvs_hex     fuel_surf_1        -fuel_surf_2	    % tvel section 2
+cell  tvel_section_3     0  fill l3 -tvs_hex     fuel_surf_2        -fuel_top	    % tvel section 3
+
+
+
+
+% --- Thermal scattering data for light water:
+
+therm lwtr lwj3.11t
+
+% --- Cross section library file path:
+
+set acelib "/home/viti/serpent/xs/jeff311/jeff311u.xsdata"
+set nfylib "/home/viti/serpent/xs/jeff311/sss_jeff311.nfy"
+set declib "/home/viti/serpent/xs/jeff311/sss_jeff311.dec"
+
+
+% --- Periodic boundary condition:
+
+set bc 3
+
+% --- Group constant generation:
+
+% universe = 0 (homogenization over all space)
+% symmetry = 12
+% 2-group structure (group boundary at 0.625 eV)
+
+set gcu  0
+set sym  12
+set nfg  2  0.625E-6
+
+% --- Neutron population and criticality cycles:
+
+set pop 5000 20 20
+
+% --- Geometry and mesh plots:
+
+plot 3 5000 5000
+plot 2 5000 5000 0 -250 300
+mesh 2 5000 5000
+mesh 3 5000 5000

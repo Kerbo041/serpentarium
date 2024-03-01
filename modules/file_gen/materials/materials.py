@@ -1,5 +1,7 @@
 import random
-
+from modules.file_gen.template import template
+from modules.file_gen.default import default
+from modules.file_gen.debugger import debugger
 def mass_x(u235_x):
     u239_x = 1 - u235_x
 
@@ -38,24 +40,23 @@ def materials_template(mass, iter, u235_x):
     green = int(100 * random.random()) + 150
     blue = int(150 * random.random())
 
-    template_file = open("template/materials_template", "r")
+    template_data = {
+        "u235_x" : u235_x,
+        "iter" : iter,
+        "red" : red,
+        "green" : green, 
+        "blue" : blue, 
+        "mass_235" : mass_235, 
+        "mass_238" : mass_238, 
+        "mass_8" : mass_8
+        }
 
-    mt_raw = template_file.read()
+    debugger("get temp for " + str(iter+1) + " material")    
+    return template("material_template", template_data)
 
-    template_file.close()
-
-    mt_out = mt_raw.format(u235_x = u235_x, iter = iter, red = red, green = green, blue = blue, mass_235 = mass_235, mass_238 = mass_238, mass_8 = mass_8)
-
-    return mt_out
-
-
-def materials_default():
-    default_file = open("default/materials_default", "r")
-    md_out = default_file.read()
-    default_file.close()
-    return md_out
 
 def materials(sections,materials):
+
     u235_x = []
 
     for i in range(sections):
@@ -63,13 +64,15 @@ def materials(sections,materials):
         u235_x.append(float(materials[i]))
 
     mat_par = [mass_x(i) for i in u235_x]
-    mats_out = "% --- materials\n\n"
-    mats_out += materials_default()
+    
+    mats_out = default("materials_default")
+    
+    debugger("get def materials") 
 
     for i in range(sections):
 
         mats_out += (materials_template(mat_par[i], i+1, u235_x[i]))
     
     mats_out += "\n\n\n"
-
+    debugger("get materials") 
     return mats_out

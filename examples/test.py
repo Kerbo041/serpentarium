@@ -64,10 +64,13 @@ while i <len(S):
 
 print(out)
 
-"""
+
+
 
 fin = open("examples/template", "r")
 
 raw = fin.read()
 print(raw)
 print(raw.format(i = 10))
+"""
+
