@@ -14,8 +14,8 @@ def start_create(name, sections, x235):
     input_par.append(int(sections))
     for i in x235.split():
         input_par.append(float(i))
-    temp_data = creator(input_par)
-    printer(name, creator(temp_data))
+    printer(name, creator(input_par))
+    pass
 
 def create_input():
     window = Tk()
