@@ -1,12 +1,12 @@
 
 % -------------------- CELLS --------------------
 
-cell  tvel_bottom_zone      0   fill lt         -tvs_hex    tvel_bottom     -fuel_bottom	% tvel bottom lattice
-cell  tvel_top_zone         0   fill lt         -tvs_hex    fuel_top        -tvel_top	    % tvel top lattice
-cell  tvs_bottom_zone       0   wst             -tvs_hex    tvs_bottom      -tvel_bottom    % tvs bottom
-cell  tvs_top_zone          0   wst             -tvs_hex    tvel_top        -tvs_top        % tvs top
+cell  tvel_bottom_zone      0   fill lt         -tvs_hex     tvel_bottom     -fuel_bottom	% tvel bottom lattice
+cell  tvel_top_zone         0   fill lt         -tvs_hex     fuel_top        -tvel_top	    % tvel top lattice
+cell  tvs_bottom_zone       0   wst             -tvs_hex     tvs_bottom      -tvel_bottom    % tvs bottom
+cell  tvs_top_zone          0   wst             -tvs_hex     tvel_top        -tvs_top        % tvs top
 
-cell 99  0  outside                     tvs_hex 		                            % Outside world
-cell 98  0  outside                    -tvs_hex    -tvs_bottom		                % Outside world
-cell 97  0  outside                    -tvs_hex     tvs_top		                    % Outside world
+cell 99  0  outside                              tvs_hex 		                            % Outside world
+cell 98  0  outside                             -tvs_hex    -tvs_bottom		                % Outside world
+cell 97  0  outside                             -tvs_hex     tvs_top		                % Outside world
 
