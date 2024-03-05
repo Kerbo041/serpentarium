@@ -2,9 +2,14 @@ from tkinter import *
 from tkinter import ttk
 from tkinter.scrolledtext import ScrolledText
 from  modules.file_gen.creator import creator
+import os
 
 def printer(name, str_out):
-    fout = open("output/"+ str(name), "w")
+    try:
+        fout = open("output/"+ str(name), "w")
+    except:
+        os.mkdir("output")
+        fout = open("output/"+ str(name), "w")
     print(str_out, file = fout)
     print("--------------------------------------\nfiles created\n--------------------------------------\n\n")
 
