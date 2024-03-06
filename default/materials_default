@@ -30,7 +30,7 @@ mat water   -0.7207  moder lwtr 1001 rgb 0 0 255
 
  % --- UO2 fuel enriched to 3.6 wt-% U-235 with gd-64:
  
- mat fuel_gd   -10.45700 rgb 200 255 200
+ mat fuel_gd   -10.45700 rgb 200 255 200 burn 10
  92235.09c   -0.04103
  92238.09c   -0.79631
  64000.09c   -0.05000

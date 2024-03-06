@@ -1,5 +1,6 @@
 from tkinter import *
 from tkinter import ttk
+from tkinter import filedialog
 from tkinter.scrolledtext import ScrolledText
 from  modules.file_gen.creator import creator
 import os
@@ -62,11 +63,96 @@ def create_input():
         )
         )
     button_input.grid(column = 2, row = 4, ipadx=6, ipady=6, padx=4, pady=4)
+#Для работы скрипта должны быть установлены пакеты matplotlib и serpentTools
+from matplotlib import pyplot as plt
+import serpentTools
+import numpy as np
+
+def graph_generate():
+    name_file = filedialog.askopenfilename()
+    #Здесь указать путь к файлу детектора. Если лежит в одной папке со скриптом, то просто его имя
+    detFilePath = name_file
+    detFile = serpentTools.read(detFilePath)
+
+    #Здесь настроить цвета и названия
+    #Имена детекторов - в порядке появления во входном файле!
+
+    DetNames = ['fiss']
+    DetColors = ['blue']
+    DetLabels = [name_file]
+
+    fig, Axes = plt.subplots()
+
+    K = len(DetNames)
+
+    #DetCyl,RGrid,RInner,Router,DetTal,DetErr = [0],[0],[0],[0],[0],[0]
+
+    for h in range(K):
+        DetCyl = detFile.detectors[DetNames[h]]
+        RGrid = DetCyl.grids['Z'][:,2]
+        RInner = DetCyl.grids['Z'][:,0]
+        ROuter = DetCyl.grids['Z'][:,1]
+        DetTal = DetCyl.tallies
+        DetErr = DetCyl.errors
+
+        DetMax = max(DetTal)
+        raw_data = [ i / DetMax for i in DetTal]
+
+        Axes.errorbar(DetTal,
+                        RGrid,
+                        None,
+                        DetTal*3*DetErr, 
+                        color=DetColors[h],
+                        marker='o',
+                        markersize = 0.75,
+                        markeredgecolor='cyan',
+                        markerfacecolor='cyan',
+                        ecolor="magenta",
+                        #c='black',
+                        label=DetLabels[h]
+                        )
+
+    #Здесь настроить основные линии сетки
+    Axes.grid(visible=True, which='major', axis='both', color='0.3', linestyle='-', linewidth=0.5)
+
+    #Здесь настроить вспомогательные линии сетки
+    Axes.grid(visible=True, which='minor', axis='x', color='0.3', linestyle='-', linewidth=0.5)
+
+    #Здесь настроить пределы и подписи осей, логарифмические или нет
+    Axes.set(xlabel='ed',
+                ylabel = 'Высота, см',
+                xscale='linear',
+                yscale='linear',
+                ylim=(min(RGrid),
+                max(RGrid))
+                )
+
+    #Размещаем легенду
+    Axes.legend(loc='best')
+
+    #Сохраняем файл, можно настроить имя, формат и разрешение
+
+    plt.savefig(name_file, dpi=300, facecolor='w', edgecolor='k',orientation='portrait',
+                format='png', transparent=True, bbox_inches=None, pad_inches=0.1, metadata=None)
+
+    #Выводим график в окно
+    #plt.show()
+
 
 def create_output():
     window = Tk()
     window.title("построение графиков")
     window.geometry("250x200")
+
+
+    file_name = ""
+
+    label_button_input_file = StringVar()
+    label_button_input_file.set("выбрать файл")
+    #button_input = ttk.Button(textvariable = label_button_input_file, command = lambda file_name: file_name = )
+    #button_input.grid(column = 1, row = 1)
+
+
 
 def interface():
     root = Tk()
@@ -80,7 +166,7 @@ def interface():
 
     label_button_output_file = StringVar()
     label_button_output_file.set("Построить графики")
-    button_graphs = ttk.Button(textvariable = label_button_output_file, command = create_output)
+    button_graphs = ttk.Button(textvariable = label_button_output_file, command = graph_generate)
     button_graphs.grid(column = 2, row =1)
     
     root.mainloop()
