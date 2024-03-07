@@ -132,7 +132,7 @@ def graph_generate():
 
     #Сохраняем файл, можно настроить имя, формат и разрешение
 
-    plt.savefig(name_file, dpi=300, facecolor='w', edgecolor='k',orientation='portrait',
+    plt.savefig(name_file.replace(".m", ".png"), dpi=300, facecolor='w', edgecolor='k',orientation='portrait',
                 format='png', transparent=True, bbox_inches=None, pad_inches=0.1, metadata=None)
 
     #Выводим график в окно
@@ -157,7 +157,7 @@ def create_output():
 def interface():
     root = Tk()
     root.title('serpentarium') 
-    root.geometry("250x40")
+    root.geometry("400x100")
 
     label_button_input_file = StringVar()
     label_button_input_file.set("Создать входной файл")
