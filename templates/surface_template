@@ -1,1 +1,1 @@
-surf fuel_surf{iter}    pz  	{height}	        %fuel top
+surf fuel_surf_{iter}    pz  	{height}	        %fuel top
