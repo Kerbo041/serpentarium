@@ -76,8 +76,8 @@ import numpy as np
 def graph_generate():
     name_file = filedialog.askopenfile()
     #Здесь указать путь к файлу детектора. Если лежит в одной папке со скриптом, то просто его имя
-    detFilePath = name_file
-    detFile = serpentTools.read(detFilePath)
+    detFilePath = name_file.name
+    detFile = serpentTools.read(detFilePath, "det")
 
     #Здесь настроить цвета и названия
     #Имена детекторов - в порядке появления во входном файле!
@@ -139,7 +139,7 @@ def graph_generate():
 
     #Сохраняем файл, можно настроить имя, формат и разрешение
 
-    plt.savefig(name_file.replace(".m", ".png"), dpi=300, facecolor='w', edgecolor='k',orientation='portrait',
+    plt.savefig(name_file.name.replace(".m", ".png"), dpi=300, facecolor='w', edgecolor='k',orientation='portrait',
                 format='png', transparent=True, bbox_inches=None, pad_inches=0.1, metadata=None)
 
     #Выводим график в окно
