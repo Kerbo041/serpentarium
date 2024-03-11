@@ -104,11 +104,11 @@ def graph_generate():
         DetLen = len(DetTal)
         DetAvg = DetSum / DetLen
         data_graph = [ i / DetAvg for i in DetTal]
-
+        data_errors = [data_graph[i] * 3 * DetErr[i] for i in range(len(data_graph))]
         Axes.errorbar(data_graph,
                         RGrid,
                         None,
-                        data_graph*3*DetErr, 
+                        data_errors, 
                         color=DetColors[h],
                         marker='o',
                         markersize = 0.75,
