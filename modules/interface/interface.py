@@ -73,7 +73,7 @@ import numpy as np
 
 
 
-def graph_generate(name_file):
+def graph_generate():
     name_file = []
     name_file.append(filedialog.askopenfiles())
     for name_i in name_file:
