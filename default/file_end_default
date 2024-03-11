@@ -41,10 +41,6 @@ dep butot 4 8 12 16 20 24 28
 
 set egrid 5e-4
 
-% --- Neutron population and criticality cycles:
-
-set pop 5000 20 20
-
 
 % --- Geometry and mesh plots:
 
