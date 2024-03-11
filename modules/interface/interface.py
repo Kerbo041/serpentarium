@@ -74,78 +74,76 @@ import numpy as np
 
 
 def graph_generate():
-    name_file = []
-    name_file.append(filedialog.askopenfiles())
-    for name_i in name_file:
-        #Здесь указать путь к файлу детектора. Если лежит в одной папке со скриптом, то просто его имя
-        detFilePath = name_i
-        detFile = serpentTools.read(detFilePath)
+    name_file = filedialog.askopenfile()
+    #Здесь указать путь к файлу детектора. Если лежит в одной папке со скриптом, то просто его имя
+    detFilePath = name_file
+    detFile = serpentTools.read(detFilePath)
 
-        #Здесь настроить цвета и названия
-        #Имена детекторов - в порядке появления во входном файле!
+    #Здесь настроить цвета и названия
+    #Имена детекторов - в порядке появления во входном файле!
 
-        DetNames = ['fiss']
-        DetColors = ['blue']
-        DetLabels = [name_file]
+    DetNames = ['fiss']
+    DetColors = ['blue']
+    DetLabels = [name_file]
 
-        fig, Axes = plt.subplots()
+    fig, Axes = plt.subplots()
 
-        K = len(DetNames)
+    K = len(DetNames)
 
-        #DetCyl,RGrid,RInner,Router,DetTal,DetErr = [0],[0],[0],[0],[0],[0]
+    #DetCyl,RGrid,RInner,Router,DetTal,DetErr = [0],[0],[0],[0],[0],[0]
 
-        for h in range(K):
-            DetCyl = detFile.detectors[DetNames[h]]
-            RGrid = DetCyl.grids['Z'][:,2]
-            RInner = DetCyl.grids['Z'][:,0]
-            ROuter = DetCyl.grids['Z'][:,1]
-            DetTal = DetCyl.tallies
-            DetErr = DetCyl.errors
+    for h in range(K):
+        DetCyl = detFile.detectors[DetNames[h]]
+        RGrid = DetCyl.grids['Z'][:,2]
+        RInner = DetCyl.grids['Z'][:,0]
+        ROuter = DetCyl.grids['Z'][:,1]
+        DetTal = DetCyl.tallies
+        DetErr = DetCyl.errors
 
-            DetSum = sum(DetTal)
-            DetLen = len(DetTal)
-            DetAvg = DetSum / DetLen
-            data_graph = [ i / DetAvg for i in DetTal]
+        DetSum = sum(DetTal)
+        DetLen = len(DetTal)
+        DetAvg = DetSum / DetLen
+        data_graph = [ i / DetAvg for i in DetTal]
 
-            Axes.errorbar(data_graph,
-                            RGrid,
-                            None,
-                            data_graph*3*DetErr, 
-                            color=DetColors[h],
-                            marker='o',
-                            markersize = 0.75,
-                            markeredgecolor='cyan',
-                            markerfacecolor='cyan',
-                            ecolor="magenta",
-                            #c='black',
-                            label=DetLabels[h]
-                            )
+        Axes.errorbar(data_graph,
+                        RGrid,
+                        None,
+                        data_graph*3*DetErr, 
+                        color=DetColors[h],
+                        marker='o',
+                        markersize = 0.75,
+                        markeredgecolor='cyan',
+                        markerfacecolor='cyan',
+                        ecolor="magenta",
+                        #c='black',
+                        label=DetLabels[h]
+                        )
 
-        #Здесь настроить основные линии сетки
-        Axes.grid(visible=True, which='major', axis='both', color='0.3', linestyle='-', linewidth=0.5)
+    #Здесь настроить основные линии сетки
+    Axes.grid(visible=True, which='major', axis='both', color='0.3', linestyle='-', linewidth=0.5)
 
-        #Здесь настроить вспомогательные линии сетки
-        Axes.grid(visible=True, which='minor', axis='x', color='0.3', linestyle='-', linewidth=0.5)
+    #Здесь настроить вспомогательные линии сетки
+    Axes.grid(visible=True, which='minor', axis='x', color='0.3', linestyle='-', linewidth=0.5)
 
-        #Здесь настроить пределы и подписи осей, логарифмические или нет
-        Axes.set(xlabel='ed',
-                    ylabel = 'Высота, см',
-                    xscale='linear',
-                    yscale='linear',
-                    ylim=(min(RGrid),
-                    max(RGrid))
-                    )
+    #Здесь настроить пределы и подписи осей, логарифмические или нет
+    Axes.set(xlabel='ed',
+                ylabel = 'Высота, см',
+                xscale='linear',
+                yscale='linear',
+                ylim=(min(RGrid),
+                max(RGrid))
+                )
 
-        #Размещаем легенду
-        Axes.legend(loc='best')
+    #Размещаем легенду
+    Axes.legend(loc='best')
 
-        #Сохраняем файл, можно настроить имя, формат и разрешение
+    #Сохраняем файл, можно настроить имя, формат и разрешение
 
-        plt.savefig(name_i.replace(".m", ".png"), dpi=300, facecolor='w', edgecolor='k',orientation='portrait',
-                    format='png', transparent=True, bbox_inches=None, pad_inches=0.1, metadata=None)
+    plt.savefig(name_file.replace(".m", ".png"), dpi=300, facecolor='w', edgecolor='k',orientation='portrait',
+                format='png', transparent=True, bbox_inches=None, pad_inches=0.1, metadata=None)
 
-        #Выводим график в окно
-        #plt.show()
+    #Выводим график в окно
+    #plt.show()
 
 
 
