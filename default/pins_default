@@ -1,0 +1,35 @@
+
+% -------------------- PINS --------------------
+
+% --- Central tube:
+
+pin c
+
+water  0.55
+tube   0.65
+water
+
+ % --- Empty lattice position:
+
+pin w
+
+water
+
+% --- fuel with Gd-64
+
+pin g
+
+void 0.06
+fuel_gd   0.38000
+void   0.38650
+clad   0.45500
+water
+
+pin t
+
+wst 0.45500
+water
+
+ %--- Fuel pins
+
+ 
