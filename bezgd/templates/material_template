@@ -1,0 +1,6 @@
+% --- UO2 fuel enriched to {u235_x} :
+mat fuel{iter} -10.45700 rgb {red} {green} {blue} burn 10
+92235.09c   -{mass_235}
+92238.09c   -{mass_238}
+ 8016.09c   -{mass_8}
+

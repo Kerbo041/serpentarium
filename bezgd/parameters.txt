@@ -1,0 +1,6 @@
+name:%file_name%
+%number of sections%
+%enrichment for 1 section%
+%enrichment for 2 section%
+...
+%enrichment for n section%
