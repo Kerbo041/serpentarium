@@ -1,8 +1,0 @@
-pin {iter}
-
-void        0.06
-fuel{iter}  0.38000
-void        0.38650
-clad        0.45500
-water
-
