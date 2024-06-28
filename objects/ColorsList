@@ -1,0 +1,9 @@
+class ColorsList:
+    def __init__(self, ProjectData):
+        self.color_obj = {}
+        self.color_names = {}
+        pass
+    
+    def add_color(self, color):
+        self.color_obj[color.id] = color
+        self.color_names[color.id] = color.name

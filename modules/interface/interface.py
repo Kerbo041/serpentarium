@@ -145,7 +145,46 @@ def graph_generate():
     #Выводим график в окно
     #plt.show()
 
+def create_material():
+    window = Tk()
+    window.title("Создание входного файла")
+    window.geometry("800x500")
 
+    name_label = ttk.Label(window, text = "введите имя материала")
+    name_label.grid(column = 1, row = 1, ipadx=6, ipady=6, padx=4, pady=4)
+
+
+    name_input = ttk.Entry(window)
+    name_input.grid(column = 2, row = 1, ipadx=6, ipady=6, padx=4, pady=4)
+    
+
+
+    sections_label = ttk.Label(window, text = "введите число секций по высоте")
+    sections_label.grid(column = 1, row = 2, ipadx=6, ipady=6, padx=4, pady=4)
+
+    sections_input = ttk.Entry(window)
+    sections_input.grid(column = 2, row = 2, ipadx=6, ipady=6, padx=4, pady=4)
+
+
+
+    x235_label = ttk.Label(window, text = "введите обогащение секций по высоте")
+    x235_label.grid(column = 1, row = 3, ipadx=6, ipady=6, padx=4, pady=4)
+
+    
+    x235_input = ScrolledText(window, width=50,  height=10)
+    x235_input.grid(column = 2, row = 3, ipadx=6, ipady=6, padx=4, pady=4)
+
+    
+    
+    button_input = ttk.Button(
+        window, text = "Создать входной файл", 
+        command = lambda: create_material(
+            name_input.get(),
+            sections_input.get(),
+            x235_input.get(1.0,END)
+        )
+        )
+    button_input.grid(column = 2, row = 4, ipadx=6, ipady=6, padx=4, pady=4)
 
 def interface():
     root = Tk()
@@ -162,6 +201,13 @@ def interface():
     button_graphs = ttk.Button(textvariable = label_button_output_file, command = graph_generate)
     button_graphs.grid(column = 2, row =1)
 
+
+    label_button_output_file = StringVar()
+    label_button_output_file.set("материал")
+    button_graphs = ttk.Button(textvariable = label_button_output_file, command = create_material)
+    button_graphs.grid(column = 3, row =1)
+    
+    
     root.mainloop()
 
 
